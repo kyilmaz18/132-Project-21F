@@ -4,9 +4,10 @@ import java.util.ArrayList;
 
 import customer.Customer;
 
-public class Sandwich extends Item{
+public class MainDish extends Item {
+
 	
-	public Sandwich(String name, int stock, double price, double calories, boolean ageGate,
+	public MainDish(String name, int stock, double price, double calories, boolean ageGate,
 			ArrayList<String> alergens) {
 		super(name, stock, price, calories, ageGate, alergens);
 	}
