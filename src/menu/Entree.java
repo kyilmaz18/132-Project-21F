@@ -24,7 +24,6 @@ public class Entree extends Item {
 		if (this.isAgeGate()) {
 			if (c.getAge() < 18) return false;
 		}
-		if (c.getBalance() < this.getPrice()) return false;
 		
 		if (currTime < lowLim && currTime > highLim) {
 			return false;

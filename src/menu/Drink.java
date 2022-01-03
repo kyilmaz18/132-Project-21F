@@ -5,20 +5,13 @@ import java.util.ArrayList;
 import customer.Customer;
 
 public class Drink extends Item {
-	private boolean hotOrCold;
 	private double abv;
 
-	public Drink(String name, int stock, double price, double calories, boolean ageGate, ArrayList<String> alergens,
-			boolean hotOrCold, double abv) {
+	public Drink(String name, int stock, double price, double calories, double abv, boolean ageGate, ArrayList<String> alergens) {
 		super(name, stock, price, calories, ageGate, alergens);
-		this.hotOrCold = hotOrCold;
 		this.abv = abv;
 	}
 
-	public boolean isHotOrCold() {
-		return hotOrCold;
-	}
-	
 	public double getAbv() {
 		return abv;
 	}
@@ -39,4 +32,15 @@ public class Drink extends Item {
 		
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Drink [abv=" + abv + ", getAbv()=" + getAbv() + ", getName()=" + getName() + ", getStock()="
+				+ getStock() + ", getPrice()=" + getPrice() + ", getCalories()=" + getCalories() + ", isAgeGate()="
+				+ isAgeGate() + ", getAlergens()=" + getAlergens() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + ", toString()=" + super.toString() + "]";
+	}
+	
+	
+	
 }
