@@ -12,26 +12,15 @@ package main;
 *
 ************************************************************************************************************/
 
-import java.util.ArrayList;
-
 import javax.swing.JFrame;
-
-import customer.Session;
-import manager.ManagerPanel;
-import menu.Menu;
 
 public class main {
 
 	public static void main(String[] args) {
 		
-		int tablecount = 99;
-		ArrayList<Session> sessions = new ArrayList<Session>();
-		Menu menu = new Menu();
-		
-		ManagerPanel mp = new ManagerPanel(menu);
-		mp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mp.setSize(350, 350);
-		mp.setVisible(true);
+		InitPanel ip = new InitPanel();
+		ip.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		ip.setSize(350, 350);
+		ip.setVisible(true);
 	}
-
 }

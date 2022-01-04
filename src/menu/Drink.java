@@ -1,5 +1,6 @@
 package menu;
 
+import java.awt.Image;
 import java.util.ArrayList;
 
 import customer.Customer;
@@ -7,8 +8,8 @@ import customer.Customer;
 public class Drink extends Item {
 	private double abv;
 
-	public Drink(String name, int stock, double price, double calories, double abv, boolean ageGate, ArrayList<String> alergens) {
-		super(name, stock, price, calories, ageGate, alergens);
+	public Drink(String name, int stock, double price, double calories, int ageLimit, ArrayList<String> alergens, Image image, double abv) {
+		super(name, stock, price, calories, ageLimit, alergens, image);
 		this.abv = abv;
 	}
 
@@ -16,15 +17,10 @@ public class Drink extends Item {
 		return abv;
 	}
 	
-	public boolean canOrder(Customer c) {
+	public boolean canOrder(Customer c) { // Checks Item and Customer properties to see if iten can be ordered
+		if (stock < 1) return false;
 		
-		if (this.isAgeGate()) {
-			if (c.getAge() < 18) return false;
-		}
-		
-		if (abv > 0) {
-			if (c.getAge() < 18) return false;
-		}
+		if (c.getAge() < this.getAge()) return false;
 		
 		ArrayList<String> temp = this.getAlergens();
 		temp.retainAll(c.getAllergies());
@@ -35,12 +31,30 @@ public class Drink extends Item {
 
 	@Override
 	public String toString() {
-		return "Drink [abv=" + abv + ", getAbv()=" + getAbv() + ", getName()=" + getName() + ", getStock()="
-				+ getStock() + ", getPrice()=" + getPrice() + ", getCalories()=" + getCalories() + ", isAgeGate()="
-				+ isAgeGate() + ", getAlergens()=" + getAlergens() + ", getClass()=" + getClass() + ", hashCode()="
-				+ hashCode() + ", toString()=" + super.toString() + "]";
-	}
-	
-	
-	
+		StringBuilder builder = new StringBuilder();
+		builder.append("Name: ");
+		builder.append(name);
+		builder.append("\n");
+		builder.append("Stock: ");
+		builder.append(stock);
+		builder.append("\n");
+		builder.append("Price: ");
+		builder.append(price);
+		builder.append("\n");
+		builder.append("Calories: ");
+		builder.append(calories);
+		builder.append("\n");
+		builder.append("Age Limit: : ");
+		builder.append(ageLimit);
+		builder.append("\n");
+		builder.append("Abv: ");
+		builder.append(abv);
+		builder.append("\n");
+		builder.append("Alergens: ");
+		for (int i = 0; i < alergens.size(); i++) {
+			builder.append(alergens.get(i));
+			builder.append("\t");
+		}
+		return builder.toString();
+	}	
 }

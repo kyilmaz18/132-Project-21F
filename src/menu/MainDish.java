@@ -1,21 +1,20 @@
 package menu;
 
+import java.awt.Image;
 import java.util.ArrayList;
 
 import customer.Customer;
 
 public class MainDish extends Item {
 
-	
-	public MainDish(String name, int stock, double price, double calories, boolean ageGate,
-			ArrayList<String> alergens) {
-		super(name, stock, price, calories, ageGate, alergens);
+	public MainDish(String name, int stock, double price, double calories, int ageLimit, ArrayList<String> alergens, Image image) {
+		super(name, stock, price, calories, ageLimit, alergens, image);
 	}
 
-	public boolean canOrder(Customer c) {
-		if (this.isAgeGate()) {
-			if (c.getAge() < 18) return false;
-		}
+	public boolean canOrder(Customer c) { // Checks Item and Customer properties to see if iten can be ordered
+		if (stock < 1) return false;
+		
+		if (c.getAge() < ageLimit) return false;
 		
 		ArrayList<String> temp = this.getAlergens();
 		temp.retainAll(c.getAllergies());
@@ -23,4 +22,30 @@ public class MainDish extends Item {
 		
 		return true;
 	}
+	
+	@Override
+	public String toString() {  // toString() for display purposes
+		StringBuilder builder = new StringBuilder();
+		builder.append("Name: ");
+		builder.append(name);
+		builder.append("\n");
+		builder.append("Stock: ");
+		builder.append(stock);
+		builder.append("\n");
+		builder.append("Price: ");
+		builder.append(price);
+		builder.append("\n");
+		builder.append("Calories: ");
+		builder.append(calories);
+		builder.append("\n");
+		builder.append("Age Limit: : ");
+		builder.append(ageLimit);
+		builder.append("\n");
+		builder.append("Alergens: ");
+		for (int i = 0; i < alergens.size(); i++) {
+			builder.append(alergens.get(i));
+			builder.append("\t");
+		}
+		return builder.toString();
+	}	
 }

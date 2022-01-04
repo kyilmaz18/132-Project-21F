@@ -1,21 +1,24 @@
 package menu;
 
+import java.awt.Image;
+import java.io.File;
 import java.util.ArrayList;
 
-public class Item {
-	private String name;
-	private int stock;
-	private double price, calories;
-	private boolean ageGate;
-	private ArrayList<String> alergens;
+public class Item { // Superclass for all Items protected vars for subclass access
+	protected String name;
+	protected int stock, ageLimit;
+	protected double price, calories;
+	protected ArrayList<String> alergens;
+	protected Image image;
 	
-	public Item(String name, int stock, double price, double calories, boolean ageGate, ArrayList<String> alergens) {
+	public Item(String name, int stock, double price, double calories, int ageLimit, ArrayList<String> alergens, Image image) {
 		this.name = name;
 		this.stock = stock;
 		this.price = price;
 		this.calories = calories;
-		this.ageGate = ageGate;
+		this.ageLimit = ageLimit;
 		this.alergens = alergens;
+		this.image = image;
 	}
 
 	public String getName() {
@@ -33,8 +36,12 @@ public class Item {
 	public double getCalories() {
 		return calories;
 	}
-	public boolean isAgeGate() {
-		return ageGate;
+	public int getAge() {
+		return ageLimit;
+	}
+
+	public Image getImage() {
+		return image;
 	}
 
 	public ArrayList<String> getAlergens() {
