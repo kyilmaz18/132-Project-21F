@@ -1,4 +1,4 @@
-package manager;
+package customer;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -16,11 +16,12 @@ import menu.MainDish;
 import menu.Salad;
 import menu.Sandwich;
 
-	public class MenuSelector extends JFrame{ // GUI for viewing All or a Subsection of the menu
+public class MenuSelectorCS extends JFrame {
 
 	private JButton sa, sd, se, ss, ssw, smd;
+	private int sn, cn;
 	
-	public MenuSelector() {
+	public MenuSelectorCS(int sn, int cn) {
 		
 		super("Menu Selector");
 		ButtonHandler handler = new ButtonHandler();
@@ -56,11 +57,11 @@ import menu.Sandwich;
 		public void actionPerformed(ActionEvent event) { // Switch for different menu selections
 			
 			ArrayList<Item> temp = new ArrayList<Item>();
-			MenuViewer mw;
+			MenuViewerCS mw;
 			switch (event.getActionCommand()) {
 		
 			case "Show All":
-				mw = new MenuViewer(main.getMenu());
+				mw = new MenuViewerCS(main.getMenu(), sn, cn);
 				mw.setSize(350, 350);
 				mw.setVisible(true);
 				break;
@@ -69,7 +70,7 @@ import menu.Sandwich;
 				for (int i = 0; i < main.getMenu().size(); i++) {
 					if (main.getMenu().get(i) instanceof Drink)  temp.add(main.getMenu().get(i));
 				}
-				mw = new MenuViewer(temp);
+				mw = new MenuViewerCS(temp, sn, cn);
 				mw.setSize(350, 350);
 				mw.setVisible(true);
 				break;
@@ -78,7 +79,7 @@ import menu.Sandwich;
 				for (int i = 0; i < main.getMenu().size(); i++) {
 					if (main.getMenu().get(i) instanceof Entree)  temp.add(main.getMenu().get(i));
 				}
-				mw = new MenuViewer(temp);
+				mw = new MenuViewerCS(temp, sn, cn);
 				mw.setSize(350, 350);
 				mw.setVisible(true);
 				break;
@@ -87,7 +88,7 @@ import menu.Sandwich;
 				for (int i = 0; i < main.getMenu().size(); i++) {
 					if (main.getMenu().get(i) instanceof Salad)  temp.add(main.getMenu().get(i));
 				}
-				mw = new MenuViewer(temp);
+				mw = new MenuViewerCS(temp, sn, cn);
 				mw.setSize(350, 350);
 				mw.setVisible(true);
 				break;
@@ -96,7 +97,7 @@ import menu.Sandwich;
 				for (int i = 0; i < main.getMenu().size(); i++) {
 					if (main.getMenu().get(i) instanceof Sandwich)  temp.add(main.getMenu().get(i));
 				}
-				mw = new MenuViewer(temp);
+				mw = new MenuViewerCS(temp, sn, cn);
 				mw.setSize(350, 350);
 				mw.setVisible(true);
 				break;
@@ -105,7 +106,7 @@ import menu.Sandwich;
 				for (int i = 0; i < main.getMenu().size(); i++) {
 					if (main.getMenu().get(i) instanceof MainDish)  temp.add(main.getMenu().get(i));
 				}
-				mw = new MenuViewer(temp);
+				mw = new MenuViewerCS(temp, sn, cn);
 				mw.setSize(350, 350);
 				mw.setVisible(true);
 				break;

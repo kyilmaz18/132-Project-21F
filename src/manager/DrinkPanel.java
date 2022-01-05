@@ -1,8 +1,6 @@
 package manager;
 
-
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -17,28 +15,20 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import main.main;
 import menu.Drink;
 import menu.Item;
 
-public class DrinkPanel extends JFrame {
+public class DrinkPanel extends JFrame { // GUI for Adding Drink
 	
-	private ArrayList<Item> m;
-	private Image f;
-	private JTextField name;
-	private JTextField stock;
-	private JTextField price;
-	private JTextField calories;
-	private JTextField abv;
-	private JTextField alergens;
-	private JTextField agl;
-	private JButton ic;
-	private JButton ab;
+	private String f;
+	private JTextField name, stock, price, calories, abv, agl;
+	private JButton ic,ab;
 	
 	final JFileChooser fc = new JFileChooser();
 	
-	public DrinkPanel(ArrayList<Item> m) {	
+	public DrinkPanel() {	
 		super("Drink Panel");
-		this.m = m;
 		
 		setLayout(new GridLayout(20,2));
 		
@@ -72,12 +62,6 @@ public class DrinkPanel extends JFrame {
 	    l.setLabelFor(abv);
 	    add(abv);
 	    
-	    l = new JLabel("Alergens:", JLabel.LEFT);
-	    add(l);
-	    alergens = new JTextField(10);
-	    l.setLabelFor(alergens);
-	    add(alergens);
-	    
 	    l = new JLabel("Age Limit:", JLabel.LEFT);
 	    add(l);
 	    agl = new JTextField("0");
@@ -97,12 +81,9 @@ public class DrinkPanel extends JFrame {
 	private class ButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
 			if (event.getSource() == ab) {
-				ArrayList<String> af = new ArrayList<String>(Arrays.asList(alergens.getText().toLowerCase().replaceAll("\\s", "").split(",")));
 				try {
-					if(f == null) {
-						throw new DataFormatException("Invalid File");
-					}
-					m.add(new Drink(name.getText(), Integer.parseInt(stock.getText()), Double.parseDouble(price.getText()), Double.parseDouble(calories.getText()), Integer.parseInt(agl.getText()), af, f, Double.parseDouble(abv.getText())));
+					if(f == null) throw new DataFormatException();
+					main.getMenu().add(new Drink(name.getText(), Integer.parseInt(stock.getText()), Double.parseDouble(price.getText()), Double.parseDouble(calories.getText()), Integer.parseInt(agl.getText()), f, Double.parseDouble(abv.getText())));
 					JOptionPane.showMessageDialog(null, "Drink Added", "Success", JOptionPane.DEFAULT_OPTION);
 				} catch (DataFormatException e) {
 					JOptionPane.showMessageDialog(null, "No Image Found", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -114,7 +95,8 @@ public class DrinkPanel extends JFrame {
 				int returnVal = fc.showOpenDialog(DrinkPanel.this);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					try {
-						f = ImageIO.read(fc.getSelectedFile());
+						ImageIO.read(fc.getSelectedFile());
+						f = fc.getSelectedFile().getPath();
 					} catch (Exception e) {
 						JOptionPane.showMessageDialog(null, "Invalid File", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}

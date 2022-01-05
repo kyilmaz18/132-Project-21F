@@ -1,30 +1,32 @@
 package menu;
 
-import java.awt.Image;
+import java.io.Serializable;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 import customer.Customer;
 
-public class Drink extends Item {
+public class Drink extends Item implements Serializable {
 	private double abv;
 
-	public Drink(String name, int stock, double price, double calories, int ageLimit, ArrayList<String> alergens, Image image, double abv) {
-		super(name, stock, price, calories, ageLimit, alergens, image);
+	public Drink(String name, int stock, double price, double calories, int ageLimit, String image, double abv) {
+		super(name, stock, price, calories, ageLimit, image);
 		this.abv = abv;
 	}
-
+	
 	public double getAbv() {
 		return abv;
 	}
-	
-	public boolean canOrder(Customer c) { // Checks Item and Customer properties to see if iten can be ordered
+
+	public void setAbv(double abv) {
+		this.abv = abv;
+	}
+
+	@Override
+	public boolean canOrder(Customer c) { 
 		if (stock < 1) return false;
 		
-		if (c.getAge() < this.getAge()) return false;
-		
-		ArrayList<String> temp = this.getAlergens();
-		temp.retainAll(c.getAllergies());
-		if (temp.size() > 0) return false; //TODO: Turn this to warning window in GUI
+		if (c.getAge() < this.getAgeLimit()) return false;
 		
 		return true;
 	}
@@ -50,11 +52,6 @@ public class Drink extends Item {
 		builder.append("Abv: ");
 		builder.append(abv);
 		builder.append("\n");
-		builder.append("Alergens: ");
-		for (int i = 0; i < alergens.size(); i++) {
-			builder.append(alergens.get(i));
-			builder.append("\t");
-		}
 		return builder.toString();
 	}	
 }

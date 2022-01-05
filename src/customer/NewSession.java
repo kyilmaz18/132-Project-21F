@@ -1,8 +1,8 @@
 package customer;
 
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,20 +10,16 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import menu.Item;
+import main.main;
 
 public class NewSession extends JFrame {
-
-	private Session cs;
+	
 	private JTextField count;
-	private int tc;
-	
-	
-	public NewSession(ArrayList<Item> m, int tc, ArrayList<Session> sessions) {
+
+	public NewSession() {
 		
 		super("Arrange Seating");
-		this.tc = tc;
-		sessions.add(cs);
+		setLayout(new FlowLayout());
 		
 		JLabel l = new JLabel("Enter Guest Amount:", JLabel.LEFT);
 	    add(l);
@@ -31,7 +27,7 @@ public class NewSession extends JFrame {
 	    l.setLabelFor(count);
 	    add(count);
 	    
-	    JButton ss = new JButton("Select Image");
+	    JButton ss = new JButton("Place Orders");
 	    add(ss);
 	    ButtonHandler handler = new ButtonHandler();
 		ss.addActionListener(handler);	    
@@ -39,14 +35,17 @@ public class NewSession extends JFrame {
 	private class ButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
 			try {
-				if (Integer.parseInt(count.getText()) > 4 + (tc - 1) * 2 ) throw new ArithmeticException();
-				tc--;
-				for (int i = Integer.parseInt(count.getText()) - 4; i > 0; i = i - 2) tc--;
+				if (Integer.parseInt(count.getText()) > 4 + (main.getTableCount() - 1) * 2 ) throw new ArithmeticException();
+				main.setTableCount(main.getTableCount() - 1);
+				Session ns = new Session();
+				main.addSession(ns);
+				for (int i = Integer.parseInt(count.getText()) - 4; i > 0; i = i - 2) main.setTableCount(main.getTableCount() - 1);
 				for (int i = 0; i < Integer.parseInt(count.getText()); i++) {
-		    		CustomerPanel cp = new CustomerPanel(cs);
+		    		CustomerPanel cp = new CustomerPanel(main.getSessions().indexOf(ns));
 		    		cp.setSize(350,350);
 					cp.setVisible(true);
 				}
+				NewSession.this.setVisible(false);
 			} catch (ArithmeticException e) {
 				JOptionPane.showMessageDialog(null, "Not Enough Seats", "ERROR", JOptionPane.ERROR_MESSAGE);
 		    } catch (Exception e) {

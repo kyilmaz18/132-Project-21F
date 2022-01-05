@@ -4,8 +4,10 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
+import customer.NewSession;
 import customer.Session;
 import menu.Item;
+import main.main;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -14,25 +16,19 @@ import java.util.ArrayList;
 
 public class ManagerPanel extends JFrame { // Main panel for the manager
 
-	private JButton sns, ss, sm, aib, es;
+	private JButton sns, ss, sm, aib, em, es;
 	private JComboBox<String> combo1;
-	private ArrayList<Item> m;
-	private int tc ;
-	private ArrayList<Session> sessions = new ArrayList<Session>();
 	
 	private static final String[] types = {"Drink", "Entree", "Salad", "Sandwich", "Main Dish"}; 
 	
-	public ManagerPanel (ArrayList<Item> m, int tc) {
+	public ManagerPanel () {
 		
 		super("Manager Panel");
-		this.m = m;
-		this.tc = tc;
-		
-		setLayout(new GridLayout(6,0));
-		
-		sns = new JButton("Start new sessions");
-		add(sns);
+		setLayout(new GridLayout(0,1));
 		ButtonHandler handler = new ButtonHandler();
+		
+		sns = new JButton("Start New Session");
+		add(sns);
 		sns.addActionListener(handler);
 		
 		ss = new JButton("Show Sessions");
@@ -50,6 +46,10 @@ public class ManagerPanel extends JFrame { // Main panel for the manager
 		add(aib);
 		aib.addActionListener(handler);
 		
+		em = new JButton("Export Menu");
+		add(em);
+		em.addActionListener(handler);
+		
 		es = new JButton("Close Restaurant");
 		add(es);
 		es.addActionListener(handler);
@@ -58,57 +58,71 @@ public class ManagerPanel extends JFrame { // Main panel for the manager
 	private class ButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
 
-			if (event.getSource() == aib) {
-				switch ((String) combo1.getSelectedItem()) {
+			switch(event.getActionCommand()) { // Switch Statement for Handling Buttons
+			
+			case "Add Item":
+				switch ((String) combo1.getSelectedItem()) { // Opens Item adding page with the combobox selection
+				
 				case "Drink":
-					DrinkPanel dp = new DrinkPanel(m);
+					DrinkPanel dp = new DrinkPanel();
 					dp.setSize(350, 350);
 					dp.setVisible(true);
 					break;
+					
 				case "Entree":
-					EntreePanel ep = new EntreePanel(m);
+					EntreePanel ep = new EntreePanel();
 					ep.setSize(350,350);
 					ep.setVisible(true);
 					break;
+					
 				case "Salad":
-					SaladPanel sp = new SaladPanel(m);
+					SaladPanel sp = new SaladPanel();
 					sp.setSize(350,350);
 					sp.setVisible(true);
 					break;
+					
 				case "Sandwich":
-					SandwichPanel swp = new SandwichPanel(m);
+					SandwichPanel swp = new SandwichPanel();
 					swp.setSize(350,350);
 					swp.setVisible(true);
 					break;
+					
 				case "Main Dish":
-					MainDishPanel mdp = new MainDishPanel(m);
+					MainDishPanel mdp = new MainDishPanel();
 					mdp.setSize(350,350);
 					mdp.setVisible(true);
-					break; 
+					break;
 				}
-			}
-			
-			if (event.getSource() == sns) {
+				break;
 				
-			}
-			
-			if (event.getSource() == ss) {
+			case "Start New Session": // Starts a new Customer Session
+				NewSession ns = new NewSession();
+				ns.setSize(350,350);
+				ns.setVisible(true);
+				break;
 				
-			}
-			
-			if (event.getSource() == sm) {
-				MenuSelector ms = new MenuSelector(m);
+			case "Show Sessions": // Shows All Sessions
+				SessionManager sm = new SessionManager();
+				sm.setSize(350,350);
+				sm.setVisible(true);
+				break;
+				
+			case "Show Menu": // Shows menu GUI
+				MenuSelector ms = new MenuSelector();
 				ms.setSize(350,350);
 				ms.setVisible(true);
-			}
-			
-			if (event.getSource() == es) {
+				break;
+				
+			case "Export Menu": // Shows Export GUI
+				MenuExporter me = new MenuExporter();
+				me.setSize(350, 350);
+				me.setVisible(true);
+				break;
+				
+			case "Close Restaurant": // Exits Program
 				System.exit(0);
+				break;
 			}
 		}
-	}
-	
-	public void addSession(Session s) {
-		this.sessions.add(s);
 	}
 }

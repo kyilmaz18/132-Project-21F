@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -19,8 +20,7 @@ import menu.Item;
 
 public class InitPanel extends JFrame { // Init panel for Manager to open the restaurant
 	
-	private ArrayList<Item> m = new ArrayList<Item>();
-	private Image f = null;
+	private File f = null;
 	private JTextField tcEntry;
 	private JButton im;
 	private JButton ob;
@@ -35,7 +35,7 @@ public class InitPanel extends JFrame { // Init panel for Manager to open the re
 		
 		JLabel l = new JLabel("Number of Tables", JLabel.LEFT); // Sets number of tables on restaurant
 	    add(l);
-	    tcEntry = new JTextField("0");
+	    tcEntry = new JTextField("1");
 	    l.setLabelFor(tcEntry);
 	    add(tcEntry);
 	    
@@ -52,24 +52,22 @@ public class InitPanel extends JFrame { // Init panel for Manager to open the re
 	private class ButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
 			if (event.getSource() == ob) {
-				if (f != null) { // TODO: Menu Import Happens here look for Object Output Stream
-					
+				try {
+					if (Integer.parseInt(tcEntry.getText()) < 1) throw new Exception();
+					main.setTableCount(Integer.parseInt(tcEntry.getText()));
+					ManagerPanel mp = new ManagerPanel();
+					mp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					mp.setSize(350, 350);
+					mp.setVisible(true);
+					InitPanel.this.setVisible(false);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Invalid Table Count", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
-				ManagerPanel mp = new ManagerPanel(m, Integer.parseInt(tcEntry.getText()));
-				mp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				mp.setSize(350, 350);
-				mp.setVisible(true);
-				InitPanel.this.setVisible(false);
 			}
 			if (event.getSource() == im) {
-				int returnVal = fc.showOpenDialog(InitPanel.this);
-				if (returnVal == JFileChooser.APPROVE_OPTION) {
-					try {
-						f = ImageIO.read(fc.getSelectedFile());
-					} catch (Exception e) {
-						JOptionPane.showMessageDialog(null, "Invalid File", "ERROR", JOptionPane.ERROR_MESSAGE);
-					}
-				}
+				MenuImporter mi = new MenuImporter();
+				mi.setSize(350,350);
+				mi.setVisible(true);
 			}
 		}
 	}

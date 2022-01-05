@@ -7,13 +7,11 @@ import menu.Item;
 public class Customer {
 	private String name;
 	private int age;
-	private ArrayList<String> alergies;
 	private ArrayList<Item> orders;
 
-	public Customer(String name, int age, ArrayList<String> alergies) {
+	public Customer(String name, int age) {
 		this.name = name;
 		this.age = age;
-		this.alergies = alergies;
 		this.orders = new ArrayList<Item>();
 	}
 
@@ -28,8 +26,8 @@ public class Customer {
 	public ArrayList<Item> getOrders() {
 		return orders;
 	}
-
-	public ArrayList<String> getAllergies() {
-		return alergies;
+	
+	public boolean addOrder(Item i) {
+		return this.orders.add(i);
 	}
 }

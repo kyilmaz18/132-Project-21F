@@ -1,51 +1,82 @@
 package menu;
 
-import java.awt.Image;
-import java.io.File;
+import java.io.Serializable;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
-public class Item { // Superclass for all Items protected vars for subclass access
-	protected String name;
+import customer.Customer;
+
+public class Item implements Serializable { // Superclass for all Items protected vars for subclass access
+	protected String name, image;
 	protected int stock, ageLimit;
 	protected double price, calories;
-	protected ArrayList<String> alergens;
-	protected Image image;
 	
-	public Item(String name, int stock, double price, double calories, int ageLimit, ArrayList<String> alergens, Image image) {
+	public Item(String name, int stock, double price, double calories, int ageLimit, String image) {
 		this.name = name;
 		this.stock = stock;
 		this.price = price;
 		this.calories = calories;
 		this.ageLimit = ageLimit;
-		this.alergens = alergens;
 		this.image = image;
 	}
 
 	public String getName() {
 		return name;
 	}
-	public void setStock(int stock) {
-		this.stock = stock;
-	}
-	public int getStock() {
-		return stock;
-	}
-	public double getPrice() {
-		return price;
-	}
-	public double getCalories() {
-		return calories;
-	}
-	public int getAge() {
-		return ageLimit;
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public Image getImage() {
+	public String getImage() {
 		return image;
 	}
 
-	public ArrayList<String> getAlergens() {
-		return alergens;
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+
+	public int getAgeLimit() {
+		return ageLimit;
+	}
+
+	public void setAgeLimit(int ageLimit) {
+		this.ageLimit = ageLimit;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public double getCalories() {
+		return calories;
+	}
+
+	public void setCalories(double calories) {
+		this.calories = calories;
 	}
 	
+	public void orderPlaced() {
+		this.stock--;
+	}
+	
+	public boolean canOrder(Customer c) { // Checks Item and Customer properties to see if iten can be ordered
+		if (stock < 1) return false;
+		
+		if (c.getAge() < ageLimit) return false;
+		
+		return true;
+	}
 }

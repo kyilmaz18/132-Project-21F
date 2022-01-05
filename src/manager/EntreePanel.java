@@ -1,7 +1,6 @@
 package manager;
 
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -16,22 +15,21 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import main.main;
 import menu.Entree;
 import menu.Item;
 
 public class EntreePanel extends JFrame { // GUI for adding new Entree
 	
-	private ArrayList<Item> m;
-	private Image f;
-	private JTextField name, stock, price, calories, st, et, alergens, agl;
+	private String f;
+	private JTextField name, stock, price, calories, st, et, agl;
 	private JButton ic, ab;
 	
 	final JFileChooser fc = new JFileChooser(); // FileChooser to pick image for item
 	
-	public EntreePanel(ArrayList<Item> m) {
+	public EntreePanel() {
 		
 		super("Drink Panel");
-		this.m = m;
 		
 		setLayout(new GridLayout(20,2));
 		
@@ -70,13 +68,7 @@ public class EntreePanel extends JFrame { // GUI for adding new Entree
 	    et = new JTextField("23:59");
 	    l.setLabelFor(et);
 	    add(et);
-	    
-	    l = new JLabel("Alergens:", JLabel.LEFT);
-	    add(l);
-	    alergens = new JTextField(10);
-	    l.setLabelFor(alergens);
-	    add(alergens);
-	    
+
 	    l = new JLabel("Age Limit:", JLabel.LEFT);
 	    add(l);
 	    agl = new JTextField("0");
@@ -96,12 +88,11 @@ public class EntreePanel extends JFrame { // GUI for adding new Entree
 	private class ButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
 			if (event.getSource() == ab) {
-				ArrayList<String> af = new ArrayList<String>(Arrays.asList(alergens.getText().toLowerCase().replaceAll("\\s", "").split(","))); // Split alergy entries for constructor
 				try {
 					if(f == null) { // Checks if no image present
 						throw new DataFormatException("Invalid File");
 					}
-					m.add(new Entree(name.getText(), Integer.parseInt(stock.getText()), Double.parseDouble(price.getText()), Double.parseDouble(calories.getText()), Integer.parseInt(agl.getText()), af, f, Integer.parseInt(st.getText().split(":")[0]), Integer.parseInt(st.getText().split(":")[1]), Integer.parseInt(et.getText().split(":")[0]), Integer.parseInt(et.getText().split(":")[1])));
+					main.getMenu().add(new Entree(name.getText(), Integer.parseInt(stock.getText()), Double.parseDouble(price.getText()), Double.parseDouble(calories.getText()), Integer.parseInt(agl.getText()), f, Integer.parseInt(st.getText().split(":")[0]), Integer.parseInt(st.getText().split(":")[1]), Integer.parseInt(et.getText().split(":")[0]), Integer.parseInt(et.getText().split(":")[1])));
 					JOptionPane.showMessageDialog(null, "Entree Added", "Success", JOptionPane.DEFAULT_OPTION);
 				} catch (DataFormatException e) {
 					JOptionPane.showMessageDialog(null, "No Image Found", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -113,7 +104,8 @@ public class EntreePanel extends JFrame { // GUI for adding new Entree
 				int returnVal = fc.showOpenDialog(EntreePanel.this);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					try {
-						f = ImageIO.read(fc.getSelectedFile());
+						ImageIO.read(fc.getSelectedFile());
+						f = fc.getSelectedFile().getPath();
 					} catch (Exception e) {
 						JOptionPane.showMessageDialog(null, "Invalid File", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}

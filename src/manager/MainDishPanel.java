@@ -1,7 +1,6 @@
 package manager;
 
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -16,22 +15,21 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import main.main;
 import menu.Item;
 import menu.MainDish;
 
 public class MainDishPanel extends JFrame { // GUI for adding new Main Dish
 	
-	private ArrayList<Item> m;
-	private Image f;
-	private JTextField name, stock, price, calories, alergens, agl;
+	private String f;
+	private JTextField name, stock, price, calories, agl;
 	private JButton ic, ab;
 	
 	final JFileChooser fc = new JFileChooser();
 
-	public MainDishPanel(ArrayList<Item> m) {
+	public MainDishPanel() {
 		
 		super("Main Dish Panel");
-		this.m = m;
 		
 		setLayout(new GridLayout(20,2));
 		
@@ -58,13 +56,7 @@ public class MainDishPanel extends JFrame { // GUI for adding new Main Dish
 	    calories = new JTextField("0");
 	    l.setLabelFor(calories);
 	    add(calories);
-	    
-	    l = new JLabel("Alergens:", JLabel.LEFT);
-	    add(l);
-	    alergens = new JTextField(10);
-	    l.setLabelFor(alergens);
-	    add(alergens);
-	    
+
 	    l = new JLabel("Age Limit:", JLabel.LEFT);
 	    add(l);
 	    agl = new JTextField("0");
@@ -84,12 +76,11 @@ public class MainDishPanel extends JFrame { // GUI for adding new Main Dish
 	private class ButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
 			if (event.getSource() == ab) {
-				ArrayList<String> af = new ArrayList<String>(Arrays.asList(alergens.getText().toLowerCase().replaceAll("\\s", "").split(",")));
 				try {
 					if(f == null) {
 						throw new DataFormatException("Invalid File");
 					}
-					m.add(new MainDish(name.getText(), Integer.parseInt(stock.getText()), Double.parseDouble(price.getText()), Double.parseDouble(calories.getText()), Integer.parseInt(agl.getText()), af, f));
+					main.getMenu().add(new MainDish(name.getText(), Integer.parseInt(stock.getText()), Double.parseDouble(price.getText()), Double.parseDouble(calories.getText()), Integer.parseInt(agl.getText()), f));
 					JOptionPane.showMessageDialog(null, "Main Dish Added", "Success", JOptionPane.DEFAULT_OPTION);
 				} catch (DataFormatException e) {
 					JOptionPane.showMessageDialog(null, "No Image Found", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -101,7 +92,8 @@ public class MainDishPanel extends JFrame { // GUI for adding new Main Dish
 				int returnVal = fc.showOpenDialog(MainDishPanel.this);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					try {
-						f = ImageIO.read(fc.getSelectedFile());
+						ImageIO.read(fc.getSelectedFile());
+						f = fc.getSelectedFile().getPath();
 					} catch (Exception e) {
 						JOptionPane.showMessageDialog(null, "Invalid File", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}

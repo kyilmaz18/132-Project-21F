@@ -1,21 +1,55 @@
 package menu;
 
-import java.awt.Image;
+import java.io.Serializable;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 import customer.Customer;
 
-public class Entree extends Item { // As variation Entrees have times they can be ordered
+public class Entree extends Item implements Serializable { // As variation Entrees have time windows they can be ordered
 	private int startHour, startMin, endHour, endMin;
 
-	public Entree(String name, int stock, double price, double calories, int ageLimit, ArrayList<String> alergens, Image image, int startHour, int startMin, int endHour, int endMin) {
-		super(name, stock, price, calories, ageLimit, alergens, image);
+	public Entree(String name, int stock, double price, double calories, int ageLimit, String image, int startHour, int startMin, int endHour, int endMin) {
+		super(name, stock, price, calories, ageLimit, image);
 		this.startHour = startHour;
 		this.startMin = startMin;
 		this.endHour = endHour;
 		this.endMin = endMin;
 	}
+	
+	public int getStartHour() {
+		return startHour;
+	}
 
+	public void setStartHour(int startHour) {
+		this.startHour = startHour;
+	}
+
+	public int getStartMin() {
+		return startMin;
+	}
+
+	public void setStartMin(int startMin) {
+		this.startMin = startMin;
+	}
+
+	public int getEndHour() {
+		return endHour;
+	}
+
+	public void setEndHour(int endHour) {
+		this.endHour = endHour;
+	}
+
+	public int getEndMin() {
+		return endMin;
+	}
+
+	public void setEndMin(int endMin) {
+		this.endMin = endMin;
+	}
+
+	@Override
 	public boolean canOrder(Customer c) { // Checks Item and Customer properties to see if iten can be ordered
 		if (stock < 1) return false;
 		
@@ -23,15 +57,11 @@ public class Entree extends Item { // As variation Entrees have times they can b
 		int highLim = this.endHour * 60 + this.endMin;
 		int currTime = java.time.LocalTime.now().getHour() * 60 + java.time.LocalTime.now().getMinute(); // Checks if system time is within given timewindow
 		
-		if (c.getAge() < this.getAge()) return false;
+		if (c.getAge() < this.getAgeLimit()) return false;
 		
 		if (currTime < lowLim && currTime > highLim) {
 			return false;
 		}
-		
-		ArrayList<String> temp = this.getAlergens();
-		temp.retainAll(c.getAllergies());
-		if (temp.size() > 0) return false; //TODO: Turn this to warning window in GUI
 		
 		return true;
 	}
@@ -64,10 +94,6 @@ public class Entree extends Item { // As variation Entrees have times they can b
 		builder.append(endMin);
 		builder.append("\n");
 		builder.append("Alergens: ");
-		for (int i = 0; i < alergens.size(); i++) {
-			builder.append(alergens.get(i));
-			builder.append("\t");
-		}
 		return builder.toString();
 	}
 }

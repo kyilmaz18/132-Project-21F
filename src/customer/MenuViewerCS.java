@@ -1,4 +1,4 @@
-package manager;
+package customer;
 
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -16,14 +16,14 @@ import javax.swing.JFrame;
 
 import menu.Item;
 
-public class MenuViewer extends JFrame{ // GUI for displaying selected menu from MenuSelector
-	
+public class MenuViewerCS extends JFrame {
 	private LinkedList<JButton> buttons = new LinkedList<JButton>();
 	private JButton mi, ba;
 	private ArrayList<Item> m;
+	private int sn, cn;
 	private Image img;
 
-	public MenuViewer(ArrayList<Item> m) { // Grabs menu from the MenuSelector and builds gui
+	public MenuViewerCS(ArrayList<Item> m, int sn, int cn) { // Grabs menu from the MenuSelector and builds gui
 		
 		super("Menu");
 		this.m = m;
@@ -51,18 +51,16 @@ public class MenuViewer extends JFrame{ // GUI for displaying selected menu from
 	
 	private class ButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
-			
-			if (event.getSource() != ba) { // Finds index from button array to view selected item
-				ItemViewer iv = new ItemViewer(m.get(buttons.indexOf(event.getSource())));
+
+			if (event.getSource() != ba) {
+				ItemViewerCS iv = new ItemViewerCS(m.get(buttons.indexOf(event.getSource())), sn, cn);
 				iv.setSize(350, 350);
 				iv.setVisible(true);
 			}
 			
 			if (event.getSource() == ba) {
-				MenuViewer.this.setVisible(false);
+				MenuViewerCS.this.setVisible(false);
 			}
-			
 		}
 	}
-		
 }

@@ -1,21 +1,30 @@
 package customer;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import manager.DrinkPanel.ButtonHandler;
+import main.main;
 
 public class CustomerPanel extends JFrame{
 	
-	private JTextField name, age, alergies;
+	private JTextField name, age;
 	private JButton of;
+	private int sn;
 	
-	public CustomerPanel(Session s) {
+	public CustomerPanel(int sn) {
+		
+		super("New Customer");
+		setLayout(new GridLayout(0,2));
+		this.sn = sn;
 		
 		JLabel l = new JLabel("Name:", JLabel.LEFT);
 	    add(l);
@@ -29,13 +38,7 @@ public class CustomerPanel extends JFrame{
 	    l.setLabelFor(age);
 	    add(age);
 	    
-	    l = new JLabel("Alergies:", JLabel.LEFT);
-	    add(l);
-	    alergies = new JTextField("");
-	    l.setLabelFor(alergies);
-	    add(alergies);
-	    
-	    of = new JButton("Place Order");
+	    of = new JButton("Place Orders");
 	    add(of);
 	    ButtonHandler handler = new ButtonHandler();
 		of.addActionListener(handler);
@@ -43,7 +46,15 @@ public class CustomerPanel extends JFrame{
 	
 	private class ButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
-			
+			try {
+				Customer cs = new Customer(name.getText(),Integer.parseInt(age.getText()));
+				main.getSessions().get(sn).addCustomer(cs);
+				MenuSelectorCS mscs = new MenuSelectorCS(sn, main.getSessions().get(sn).getPatronList().indexOf(cs));
+				mscs.setSize(350, 350);
+				mscs.setVisible(true);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Invalid Input", "ERROR", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
 }

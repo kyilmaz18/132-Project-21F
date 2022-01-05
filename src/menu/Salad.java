@@ -1,25 +1,23 @@
 package menu;
 
-import java.awt.Image;
+import java.io.Serializable;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 import customer.Customer;
 
-public class Salad extends Item {
+public class Salad extends Item implements Serializable {
 	
-	public Salad(String name, int stock, double price, double calories, int ageLimit, ArrayList<String> alergens, Image image) {
-		super(name, stock, price, calories, ageLimit, alergens, image);
+	public Salad(String name, int stock, double price, double calories, int ageLimit, String image) {
+		super(name, stock, price, calories, ageLimit, image);
 	}
 
+	@Override
 	public boolean canOrder(Customer c) { // Checks Item and Customer properties to see if iten can be ordered
 		if (stock < 1) return false;
 		
-		if (c.getAge() < this.getAge()) return false;
+		if (c.getAge() < this.getAgeLimit()) return false;
 
-		ArrayList<String> temp = this.getAlergens();
-		temp.retainAll(c.getAllergies());
-		if (temp.size() > 0) return false; //TODO: Turn this to warning window in GUI
-		
 		return true;
 	}
 	
@@ -41,11 +39,6 @@ public class Salad extends Item {
 		builder.append("Age Limit: : ");
 		builder.append(ageLimit);
 		builder.append("\n");
-		builder.append("Alergens: ");
-		for (int i = 0; i < alergens.size(); i++) {
-			builder.append(alergens.get(i));
-			builder.append("\t");
-		}
 		return builder.toString();
 	}
 	
