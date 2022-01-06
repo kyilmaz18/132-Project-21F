@@ -20,13 +20,13 @@ public class MenuViewer extends JFrame{ // GUI for displaying selected menu from
 	
 	private LinkedList<JButton> buttons = new LinkedList<JButton>();
 	private JButton mi, ba;
-	private ArrayList<Item> m;
+	LinkedList<Item> me = new LinkedList<Item>();
 	private Image img;
 
-	public MenuViewer(ArrayList<Item> m) { // Grabs menu from the MenuSelector and builds gui
+	public MenuViewer(LinkedList<Item> m) { // Grabs menu from the MenuSelector and builds gui
 		
 		super("Menu");
-		this.m = m;
+		for (int i = 0; i < m.size(); i++) me.add(m.get(i));
 		ButtonHandler handler = new ButtonHandler();
 		
 		setLayout(new GridLayout(0, 2));
@@ -42,7 +42,7 @@ public class MenuViewer extends JFrame{ // GUI for displaying selected menu from
 		    mi.addActionListener(handler);
 		    buttons.add(mi);
 		}
-		
+
 		ba = new JButton("Close Menu");
 	    add(ba); 
 		ba.addActionListener(handler);
@@ -53,7 +53,7 @@ public class MenuViewer extends JFrame{ // GUI for displaying selected menu from
 		public void actionPerformed(ActionEvent event) {
 			
 			if (event.getSource() != ba) { // Finds index from button array to view selected item
-				ItemViewer iv = new ItemViewer(m.get(buttons.indexOf(event.getSource())));
+				ItemViewer iv = new ItemViewer(me.get(buttons.indexOf(event.getSource())));
 				iv.setSize(350, 350);
 				iv.setVisible(true);
 			}
@@ -61,8 +61,6 @@ public class MenuViewer extends JFrame{ // GUI for displaying selected menu from
 			if (event.getSource() == ba) {
 				MenuViewer.this.setVisible(false);
 			}
-			
 		}
 	}
-		
 }

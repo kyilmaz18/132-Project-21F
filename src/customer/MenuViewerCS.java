@@ -19,14 +19,14 @@ import menu.Item;
 public class MenuViewerCS extends JFrame {
 	private LinkedList<JButton> buttons = new LinkedList<JButton>();
 	private JButton mi, ba;
-	private ArrayList<Item> m;
+	private LinkedList<Item> me = new LinkedList<Item>();
 	private int sn, cn;
 	private Image img;
 
-	public MenuViewerCS(ArrayList<Item> m, int sn, int cn) { // Grabs menu from the MenuSelector and builds gui
+	public MenuViewerCS(LinkedList<Item> m, int sn, int cn) { // Grabs menu from the MenuSelector and builds gui
 		
 		super("Menu");
-		this.m = m;
+		for (int i = 0; i < m.size(); i++) me.add(m.get(i));
 		ButtonHandler handler = new ButtonHandler();
 		
 		setLayout(new GridLayout(0, 2));
@@ -52,8 +52,8 @@ public class MenuViewerCS extends JFrame {
 	private class ButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
 
-			if (event.getSource() != ba) {
-				ItemViewerCS iv = new ItemViewerCS(m.get(buttons.indexOf(event.getSource())), sn, cn);
+			if (event.getSource() != ba) { // Uses the index of buttons to find the menu index
+				ItemViewerCS iv = new ItemViewerCS(me.get(buttons.indexOf(event.getSource())), sn, cn);
 				iv.setSize(350, 350);
 				iv.setVisible(true);
 			}

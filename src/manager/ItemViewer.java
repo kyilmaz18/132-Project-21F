@@ -47,6 +47,7 @@ public class ItemViewer extends JFrame {
 				try {
 					main.removeItem(item);
 					JOptionPane.showMessageDialog(null, "Item Removed", "Success", JOptionPane.DEFAULT_OPTION);
+					ItemViewer.this.setVisible(false);
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "Item Does Not Exist", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}

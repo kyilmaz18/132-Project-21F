@@ -3,7 +3,7 @@ package customer;
 import java.util.ArrayList;
 
 public class Session {
-	private ArrayList<Customer> patronList;
+	private ArrayList<Customer> patronList; // Customers present in the session
 	
 	public Session() {
 		this.patronList = new ArrayList<Customer>();
@@ -16,18 +16,10 @@ public class Session {
 	public boolean addCustomer(Customer c) {
 		return this.patronList.add(c);
 	}
-	
-	public int getCustomerCount() {
-		return this.patronList.size();
-	}
 
-	public double getBill() {
+	public double getBill() { // Gets the total bill of the session
 		double bill = 0;
-		for (int i = 0; i < this.patronList.size(); i++) {
-			for (int j = 0; j < this.patronList.get(i).getOrders().size(); i++) {
-				bill += this.patronList.get(i).getOrders().get(j).getPrice();
-			}
-		}
+		for (int i = 0; i < this.patronList.size(); i++) bill += this.patronList.get(i).getBill(); // Session and Customer both have getBill() method
 		return bill;
 	}
 	

@@ -42,13 +42,11 @@ public class ItemViewerCS extends JFrame {
 	private class ButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
 			try {
-				System.out.println((i.canOrder(main.getSessions().get(sn).getPatronList().get(cn))));
-				if (!(i.canOrder(main.getSessions().get(sn).getPatronList().get(cn)))) throw new Exception();
+				if (!(i.canOrder(main.getSessions().get(sn).getPatronList().get(cn)))) throw new Exception(); // Checks if the item can be ordered
 				main.getSessions().get(sn).getPatronList().get(cn).addOrder(i);
 				main.getMenu().get(main.getMenu().indexOf(i)).orderPlaced();
 				JOptionPane.showMessageDialog(null, "Order Added", "Success", JOptionPane.DEFAULT_OPTION);
 			} catch (Exception e) {
-				e.printStackTrace();
 				JOptionPane.showMessageDialog(null, "Can't order item", "ERROR", JOptionPane.ERROR_MESSAGE);
 			}
 		}

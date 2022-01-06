@@ -28,7 +28,8 @@ public class SandwichPanel extends JFrame { // GUI for creating new sandwich
 	final JFileChooser fc = new JFileChooser();
 
 	public SandwichPanel() {
-		super("Salad Panel");
+		
+		super("Sandwich Panel");
 		
 		setLayout(new GridLayout(20,2));
 		

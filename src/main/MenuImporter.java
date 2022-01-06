@@ -5,10 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.zip.DataFormatException;
 
 import javax.swing.JButton;
@@ -17,7 +15,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import manager.MenuExporter;
 import menu.Item;
 
 public class MenuImporter extends JFrame {
@@ -62,9 +59,10 @@ public class MenuImporter extends JFrame {
 					if(f == null) throw new DataFormatException();
 					FileInputStream FIS = new FileInputStream(f);
 		            ObjectInputStream OIS = new ObjectInputStream(FIS);
-		            main.setMenu((ArrayList<Item>) OIS.readObject());
+		            main.setMenu((LinkedList<Item>) OIS.readObject());
 		            OIS.close();
 		            FIS.close();
+		            JOptionPane.showMessageDialog(null, "Menu Imported", "Success", JOptionPane.DEFAULT_OPTION);
 				} catch (DataFormatException e) {
 					JOptionPane.showMessageDialog(null, "No File Found", "ERROR", JOptionPane.ERROR_MESSAGE);
 				} catch (Exception e) {

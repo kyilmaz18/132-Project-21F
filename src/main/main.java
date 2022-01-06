@@ -1,6 +1,5 @@
 package main;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 /* *********** Pledge of Honor ***************************************************************************
@@ -24,7 +23,7 @@ public class main {
 
 	private static int tableCount;
 	private static LinkedList<Session> sessions = new LinkedList<Session>();
-	private static ArrayList<Item> menu = new ArrayList<Item>();
+	private static LinkedList<Item> menu = new LinkedList<Item>();
 	
 	public static void main(String[] args) {
 		
@@ -50,11 +49,11 @@ public class main {
 		main.tableCount = c;
 	}	
 	
-	public static ArrayList<Item> getMenu(){
+	public static LinkedList<Item> getMenu(){
 		return main.menu;
 	}
 	
-	public static void setMenu(ArrayList<Item> menu) {
+	public static void setMenu(LinkedList<Item> menu) {
 		main.menu = menu;
 	}
 

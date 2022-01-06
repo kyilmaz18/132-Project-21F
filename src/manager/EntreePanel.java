@@ -29,7 +29,7 @@ public class EntreePanel extends JFrame { // GUI for adding new Entree
 	
 	public EntreePanel() {
 		
-		super("Drink Panel");
+		super("Entree Panel");
 		
 		setLayout(new GridLayout(20,2));
 		

@@ -61,6 +61,7 @@ public class MenuExporter extends JFrame { // Exports the current for future use
 		            OOS.writeObject(main.getMenu());
 		            OOS.close();
 		            FOS.close();
+		            JOptionPane.showMessageDialog(null, "Menu Exported", "Success", JOptionPane.DEFAULT_OPTION);
 				} catch (DataFormatException e) {
 					JOptionPane.showMessageDialog(null, "No File Found", "ERROR", JOptionPane.ERROR_MESSAGE);
 				} catch (Exception e) {

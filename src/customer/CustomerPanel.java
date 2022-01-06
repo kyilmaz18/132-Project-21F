@@ -20,7 +20,7 @@ public class CustomerPanel extends JFrame{
 	private JButton of;
 	private int sn;
 	
-	public CustomerPanel(int sn) {
+	public CustomerPanel(int sn) { // Panel for entering customer info
 		
 		super("New Customer");
 		setLayout(new GridLayout(0,2));
@@ -45,13 +45,14 @@ public class CustomerPanel extends JFrame{
 	}
 	
 	private class ButtonHandler implements ActionListener {
-		public void actionPerformed(ActionEvent event) {
+		public void actionPerformed(ActionEvent event) { // Checks input and creates a new customer class
 			try {
 				Customer cs = new Customer(name.getText(),Integer.parseInt(age.getText()));
 				main.getSessions().get(sn).addCustomer(cs);
 				MenuSelectorCS mscs = new MenuSelectorCS(sn, main.getSessions().get(sn).getPatronList().indexOf(cs));
 				mscs.setSize(350, 350);
 				mscs.setVisible(true);
+				CustomerPanel.this.setVisible(false);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, "Invalid Input", "ERROR", JOptionPane.ERROR_MESSAGE);
 			}

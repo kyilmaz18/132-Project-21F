@@ -35,7 +35,6 @@ public class ItemModifier extends JFrame { // Modifies a Selected Item Switch st
 		ButtonHandler handler = new ButtonHandler();
 		setLayout(new GridLayout(0,2));
 		item = main.getMenu().indexOf(I);
-		System.out.println(I.getClass().toString());
 				
 		switch (I.getClass().toString()) { // Builds GUI depending on the Item Subclass using switch
 		
@@ -49,7 +48,7 @@ public class ItemModifier extends JFrame { // Modifies a Selected Item Switch st
 		    
 		    l = new JLabel("Stock:", JLabel.LEFT);
 		    add(l);
-		    stock = new JTextField(main.getMenu().get(item).getStock());
+		    stock = new JTextField("" + main.getMenu().get(item).getStock());
 		    l.setLabelFor(stock);
 		    add(stock);
 		    
@@ -73,7 +72,7 @@ public class ItemModifier extends JFrame { // Modifies a Selected Item Switch st
 		    
 		    l = new JLabel("Age Limit:", JLabel.LEFT);
 		    add(l);
-		    agl = new JTextField(main.getMenu().get(item).getAgeLimit());
+		    agl = new JTextField("" + main.getMenu().get(item).getAgeLimit());
 		    l.setLabelFor(agl);
 		    add(agl);
 		    
@@ -81,13 +80,13 @@ public class ItemModifier extends JFrame { // Modifies a Selected Item Switch st
 		    add(ic);
 			ic.addActionListener(handler);
 		    
-		    ab = new JButton("Add Drink");
+		    ab = new JButton("Edit Drink");
 		    add(ab); 
 			ab.addActionListener(handler);
 			
 			break;
 			
-		case "menu.Entree":
+		case "class menu.Entree":
 			
 			l = new JLabel("Name:", JLabel.LEFT);
 		    add(l);
@@ -97,7 +96,7 @@ public class ItemModifier extends JFrame { // Modifies a Selected Item Switch st
 		    
 		    l = new JLabel("Stock:", JLabel.LEFT);
 		    add(l);
-		    stock = new JTextField(main.getMenu().get(item).getStock());
+		    stock = new JTextField("" + main.getMenu().get(item).getStock());
 		    l.setLabelFor(stock);
 		    add(stock);
 		    
@@ -115,19 +114,19 @@ public class ItemModifier extends JFrame { // Modifies a Selected Item Switch st
 		    
 		    l = new JLabel("Start Time:", JLabel.LEFT);
 		    add(l);
-		    st = new JTextField(((Entree)main.getMenu().get(item)).getStartHour() + ":" + ((Entree)main.getMenu().get(item)).getStartMin());
+		    st = new JTextField("" + ((Entree)main.getMenu().get(item)).getStartHour() + ":" + ((Entree)main.getMenu().get(item)).getStartMin());
 		    l.setLabelFor(st);
 		    add(st);
 		    
 		    l = new JLabel("End Time:", JLabel.LEFT);
 		    add(l);
-		    et = new JTextField(((Entree)main.getMenu().get(item)).getEndHour() + ":" + ((Entree)main.getMenu().get(item)).getEndMin());
+		    et = new JTextField("" + ((Entree)main.getMenu().get(item)).getEndHour() + ":" + ((Entree)main.getMenu().get(item)).getEndMin());
 		    l.setLabelFor(et);
 		    add(et);
 		    
 		    l = new JLabel("Age Limit:", JLabel.LEFT);
 		    add(l);
-		    agl = new JTextField(main.getMenu().get(item).getAgeLimit());
+		    agl = new JTextField("" + main.getMenu().get(item).getAgeLimit());
 		    l.setLabelFor(agl);
 		    add(agl);
 		    
@@ -135,13 +134,13 @@ public class ItemModifier extends JFrame { // Modifies a Selected Item Switch st
 		    add(ic);
 			ic.addActionListener(handler);
 		    
-		    ab = new JButton("Add Entree");
+		    ab = new JButton("Edit Entree");
 		    add(ab); 
 			ab.addActionListener(handler);
 			
 			break;
 			
-		case "menu.Salad":
+		case "class menu.Salad":
 			
 			l = new JLabel("Name:", JLabel.LEFT);
 		    add(l);
@@ -151,7 +150,7 @@ public class ItemModifier extends JFrame { // Modifies a Selected Item Switch st
 		    
 		    l = new JLabel("Stock:", JLabel.LEFT);
 		    add(l);
-		    stock = new JTextField(main.getMenu().get(item).getStock());
+		    stock = new JTextField("" + main.getMenu().get(item).getStock());
 		    l.setLabelFor(stock);
 		    add(stock);
 		    
@@ -169,7 +168,7 @@ public class ItemModifier extends JFrame { // Modifies a Selected Item Switch st
 		    
 		    l = new JLabel("Age Limit:", JLabel.LEFT);
 		    add(l);
-		    agl = new JTextField(main.getMenu().get(item).getAgeLimit());
+		    agl = new JTextField("" + main.getMenu().get(item).getAgeLimit());
 		    l.setLabelFor(agl);
 		    add(agl);
 		    
@@ -183,7 +182,7 @@ public class ItemModifier extends JFrame { // Modifies a Selected Item Switch st
 			
 			break;
 			
-		case "menu.Sandwich":
+		case "class menu.Sandwich":
 			
 			l = new JLabel("Name:", JLabel.LEFT);
 		    add(l);
@@ -193,7 +192,7 @@ public class ItemModifier extends JFrame { // Modifies a Selected Item Switch st
 		    
 		    l = new JLabel("Stock:", JLabel.LEFT);
 		    add(l);
-		    stock = new JTextField(main.getMenu().get(item).getStock());
+		    stock = new JTextField("" + main.getMenu().get(item).getStock());
 		    l.setLabelFor(stock);
 		    add(stock);
 		    
@@ -211,7 +210,7 @@ public class ItemModifier extends JFrame { // Modifies a Selected Item Switch st
 		    
 		    l = new JLabel("Age Limit:", JLabel.LEFT);
 		    add(l);
-		    agl = new JTextField(main.getMenu().get(item).getAgeLimit());
+		    agl = new JTextField("" + main.getMenu().get(item).getAgeLimit());
 		    l.setLabelFor(agl);
 		    add(agl);
 		    
@@ -225,7 +224,7 @@ public class ItemModifier extends JFrame { // Modifies a Selected Item Switch st
 			
 			break;
 			
-		case "menu.MainDish":
+		case "class menu.MainDish":
 			
 			l = new JLabel("Name:", JLabel.LEFT);
 		    add(l);
@@ -235,7 +234,7 @@ public class ItemModifier extends JFrame { // Modifies a Selected Item Switch st
 		    
 		    l = new JLabel("Stock:", JLabel.LEFT);
 		    add(l);
-		    stock = new JTextField(main.getMenu().get(item).getStock());
+		    stock = new JTextField("" + main.getMenu().get(item).getStock());
 		    l.setLabelFor(stock);
 		    add(stock);
 		    
@@ -253,7 +252,7 @@ public class ItemModifier extends JFrame { // Modifies a Selected Item Switch st
 		    
 		    l = new JLabel("Age Limit:", JLabel.LEFT);
 		    add(l);
-		    agl = new JTextField(main.getMenu().get(item).getAgeLimit());
+		    agl = new JTextField("" + main.getMenu().get(item).getAgeLimit());
 		    l.setLabelFor(agl);
 		    add(agl);
 		    
@@ -286,7 +285,7 @@ public class ItemModifier extends JFrame { // Modifies a Selected Item Switch st
 				
 				switch (main.getMenu().get(item).getClass().toString()) {
 	
-				case "menu.Drink":
+				case "class menu.Drink":
 					
 					try {
 						if(f == null) throw new DataFormatException();
@@ -305,7 +304,7 @@ public class ItemModifier extends JFrame { // Modifies a Selected Item Switch st
 					}
 					break;
 					
-				case "menu.Entree":
+				case "class menu.Entree":
 					
 					try {
 						if(f == null) throw new DataFormatException();
@@ -327,7 +326,7 @@ public class ItemModifier extends JFrame { // Modifies a Selected Item Switch st
 					}
 					break;
 					
-				case "menu.Salad":
+				case "class menu.Salad":
 					
 					try {
 						if(f == null) throw new DataFormatException();
@@ -345,7 +344,7 @@ public class ItemModifier extends JFrame { // Modifies a Selected Item Switch st
 					}
 					break;
 					
-				case "menu.Sandwich":
+				case "class menu.Sandwich":
 					
 					try {
 						if(f == null) throw new DataFormatException();
@@ -363,7 +362,7 @@ public class ItemModifier extends JFrame { // Modifies a Selected Item Switch st
 					}
 					break;
 					
-				case "menu.MainDish":
+				case "class menu.MainDish":
 					
 					try {
 						if(f == null) throw new DataFormatException();

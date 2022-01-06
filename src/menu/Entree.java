@@ -59,7 +59,7 @@ public class Entree extends Item implements Serializable { // As variation Entre
 		
 		if (c.getAge() < this.getAgeLimit()) return false;
 		
-		if (currTime < lowLim && currTime > highLim) {
+		if (currTime < lowLim || currTime > highLim) {
 			return false;
 		}
 		

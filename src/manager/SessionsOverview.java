@@ -49,9 +49,9 @@ public class SessionsOverview extends JFrame {
 		public void actionPerformed(ActionEvent event) {
 			
 			if (event.getSource() != ba) { // Finds index from button array to view selected item
-			/*	SessionViewer sv = new SessionViewer((buttons.indexOf(event.getSource())));
+				SessionViewer sv = new SessionViewer((buttons.indexOf(event.getSource())));
 				sv.setSize(350, 350);
-				sv.setVisible(true); */
+				sv.setVisible(true);
 			}
 			
 			if (event.getSource() == ba) {

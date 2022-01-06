@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import menu.Item;
 
-public class Customer {
+public class Customer { // Customer class keeps track of info and orders
 	private String name;
 	private int age;
 	private ArrayList<Item> orders;
@@ -27,11 +27,11 @@ public class Customer {
 		return orders;
 	}
 	
-	public boolean addOrder(Item i) {
+	public boolean addOrder(Item i) { // Adds item to the customer order list
 		return this.orders.add(i);
 	}
 	
-	public double getBill() {
+	public double getBill() { // Gets the bill for the customer
 		double total = 0;
 		for (int i = 0; i < this.orders.size(); i++) total += this.orders.get(i).getPrice();
 		return total;

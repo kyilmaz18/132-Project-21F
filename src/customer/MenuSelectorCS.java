@@ -3,7 +3,7 @@ package customer;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,7 +22,7 @@ public class MenuSelectorCS extends JFrame {
 	private JButton sa, sd, se, ss, ssw, smd, fo;
 	private int sn, cn;
 	
-	public MenuSelectorCS(int sn, int cn) {
+	public MenuSelectorCS(int sn, int cn) { // Menu selector for the customer
 		
 		super("Menu Selector");
 		ButtonHandler handler = new ButtonHandler();
@@ -61,7 +61,7 @@ public class MenuSelectorCS extends JFrame {
 	private class ButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent event) { // Switch for different menu selections
 			
-			ArrayList<Item> temp = new ArrayList<Item>();
+			LinkedList<Item> temp = new LinkedList<Item>();
 			MenuViewerCS mw;
 			switch (event.getActionCommand()) {
 		
@@ -77,7 +77,7 @@ public class MenuSelectorCS extends JFrame {
 				
 			case "Show Drinks": 
 				for (int i = 0; i < main.getMenu().size(); i++) {
-					if (main.getMenu().get(i) instanceof Drink && main.getMenu().get(i).getStock() != 0)  temp.add(main.getMenu().get(i));
+					if (main.getMenu().get(i) instanceof Drink && main.getMenu().get(i).getStock() != 0)  temp.add(main.getMenu().get(i)); // Creates a new menu from selected class and stock availability
 				}
 				mw = new MenuViewerCS(temp, sn, cn);
 				mw.setSize(350, 350);
@@ -125,7 +125,7 @@ public class MenuSelectorCS extends JFrame {
 				temp.clear();
 				break;
 				
-			case "Finish Ordering":
+			case "Finish Ordering": // Closes the menu and displays the final order for the customer
 				String text = "";
 				int total = 0;
 				for (int i = 0; i < main.getSessions().get(sn).getPatronList().get(cn).getOrders().size(); i++) {
@@ -133,7 +133,7 @@ public class MenuSelectorCS extends JFrame {
 					total += main.getSessions().get(sn).getPatronList().get(cn).getOrders().get(i).getPrice();
 				}
 				MenuSelectorCS.this.setVisible(false);
-				JOptionPane.showMessageDialog(null, text + " " + total, "Order Complete", JOptionPane.DEFAULT_OPTION);
+				JOptionPane.showMessageDialog(null, text + " " + "Total Cost: " + total, "Order Complete", JOptionPane.DEFAULT_OPTION);
 				break;
 			}
 		}

@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -55,7 +56,7 @@ import menu.Sandwich;
 	private class ButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent event) { // Switch for different menu selections
 			
-			ArrayList<Item> temp = new ArrayList<Item>();
+			LinkedList<Item> temp = new LinkedList<Item>();
 			MenuViewer mw;
 			switch (event.getActionCommand()) {
 		

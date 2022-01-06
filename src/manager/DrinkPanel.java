@@ -85,6 +85,7 @@ public class DrinkPanel extends JFrame { // GUI for Adding Drink
 					if(f == null) throw new DataFormatException();
 					main.getMenu().add(new Drink(name.getText(), Integer.parseInt(stock.getText()), Double.parseDouble(price.getText()), Double.parseDouble(calories.getText()), Integer.parseInt(agl.getText()), f, Double.parseDouble(abv.getText())));
 					JOptionPane.showMessageDialog(null, "Drink Added", "Success", JOptionPane.DEFAULT_OPTION);
+					//DrinkPanel.this.setVisible(false);
 				} catch (DataFormatException e) {
 					JOptionPane.showMessageDialog(null, "No Image Found", "ERROR", JOptionPane.ERROR_MESSAGE);
 				} catch (Exception e) {
