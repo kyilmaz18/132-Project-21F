@@ -32,7 +32,7 @@ public class MenuImporter extends JFrame {
 		setLayout(new GridLayout(0,2));
 		ButtonHandler handler = new ButtonHandler();
 		
-		sf = new JButton("Select Export File");
+		sf = new JButton("Select Import File");
 	    add(sf);
 		sf.addActionListener(handler);
 		

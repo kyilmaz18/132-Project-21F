@@ -22,7 +22,7 @@ import menu.Item;
 
 public class main {
 
-	private static int tableCount, sessionCount;
+	private static int tableCount;
 	private static LinkedList<Session> sessions = new LinkedList<Session>();
 	private static ArrayList<Item> menu = new ArrayList<Item>();
 	
@@ -39,7 +39,6 @@ public class main {
 	}
 	
 	public static boolean addSession(Session s) {
-		main.sessionCount++;
 		return main.sessions.add(s);
 	}
 
@@ -49,14 +48,6 @@ public class main {
 
 	public static void setTableCount(int c) {
 		main.tableCount = c;
-	}
-
-	public static int getSessionCount() {
-		return main.sessionCount;
-	}
-
-	public static void setSessionCount(int sessionCount) {
-		main.sessionCount = sessionCount;
 	}	
 	
 	public static ArrayList<Item> getMenu(){

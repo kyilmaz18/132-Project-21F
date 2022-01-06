@@ -11,18 +11,21 @@ import javax.swing.JOptionPane;
 
 import main.main;
 
-public class SessionManager extends JFrame{ // Provides Session Overview for the manager
-	
+public class SessionsOverview extends JFrame {
+
 	private LinkedList<JButton> buttons = new LinkedList<JButton>();
-	private JButton mi, ba;
+	private JButton mi, ba, tc;
 	private String text;
 	
-	public SessionManager() {
+	public SessionsOverview() {
 		
 		super("Current Sessions");
 		ButtonHandler handler = new ButtonHandler();
 		
-		setLayout(new GridLayout(main.getSessions().size() + 1, 0));
+		setLayout(new GridLayout(0, 1));
+		
+		tc = new JButton("Remaining Tables:" + main.getTableCount());
+	    add(tc); 
 		
 		for (int i = 0; i < main.getSessions().size(); i++) { //Loop to create GUI entry for all Sessions, its customer numbers, and total bill
 			try {
@@ -40,11 +43,20 @@ public class SessionManager extends JFrame{ // Provides Session Overview for the
 		ba = new JButton("Close Menu");
 	    add(ba); 
 		ba.addActionListener(handler);
-		buttons.add(ba);
 	}
 	
 	private class ButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
+			
+			if (event.getSource() != ba) { // Finds index from button array to view selected item
+			/*	SessionViewer sv = new SessionViewer((buttons.indexOf(event.getSource())));
+				sv.setSize(350, 350);
+				sv.setVisible(true); */
+			}
+			
+			if (event.getSource() == ba) {
+				SessionsOverview.this.setVisible(false);
+			}
 			
 		}
 	}

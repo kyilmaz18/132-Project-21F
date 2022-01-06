@@ -30,4 +30,10 @@ public class Customer {
 	public boolean addOrder(Item i) {
 		return this.orders.add(i);
 	}
+	
+	public double getBill() {
+		double total = 0;
+		for (int i = 0; i < this.orders.size(); i++) total += this.orders.get(i).getPrice();
+		return total;
+	}
 }

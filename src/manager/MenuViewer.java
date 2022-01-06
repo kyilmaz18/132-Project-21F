@@ -29,7 +29,7 @@ public class MenuViewer extends JFrame{ // GUI for displaying selected menu from
 		this.m = m;
 		ButtonHandler handler = new ButtonHandler();
 		
-		setLayout(new GridLayout(m.size() + 1, 0));
+		setLayout(new GridLayout(0, 2));
 		
 		for (int i = 0; i < m.size(); i++) { //Loop to create GUI entry for all menu Items
 			try {

@@ -8,7 +8,7 @@ import customer.Customer;
 
 public class Item implements Serializable { // Superclass for all Items protected vars for subclass access
 	protected String name, image;
-	protected int stock, ageLimit;
+	protected int stock, ageLimit, currentOrders;
 	protected double price, calories;
 	
 	public Item(String name, int stock, double price, double calories, int ageLimit, String image) {
@@ -18,6 +18,7 @@ public class Item implements Serializable { // Superclass for all Items protecte
 		this.calories = calories;
 		this.ageLimit = ageLimit;
 		this.image = image;
+		this.currentOrders = 0;
 	}
 
 	public String getName() {
@@ -68,10 +69,19 @@ public class Item implements Serializable { // Superclass for all Items protecte
 		this.calories = calories;
 	}
 	
-	public void orderPlaced() {
-		this.stock--;
+	public int getCurrentOrders() {
+		return currentOrders;
+	}
+
+	public void setCurrentOrders(int currentOrders) {
+		this.currentOrders = currentOrders;
 	}
 	
+	public void orderPlaced() {
+		this.stock--;
+		this.currentOrders++;
+	}
+
 	public boolean canOrder(Customer c) { // Checks Item and Customer properties to see if iten can be ordered
 		if (stock < 1) return false;
 		

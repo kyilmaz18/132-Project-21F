@@ -27,18 +27,20 @@ public class MainDish extends Item implements Serializable {
 		builder.append("Name: ");
 		builder.append(name);
 		builder.append("\n");
-		builder.append("Stock: ");
+		builder.append(" Stock: ");
 		builder.append(stock);
 		builder.append("\n");
-		builder.append("Price: ");
+		builder.append(" Price: ");
 		builder.append(price);
 		builder.append("\n");
-		builder.append("Calories: ");
+		builder.append(" Calories: ");
 		builder.append(calories);
 		builder.append("\n");
-		builder.append("Age Limit: : ");
+		builder.append(" Age Limit: : ");
 		builder.append(ageLimit);
 		builder.append("\n");
+		builder.append(" Current Orders: ");
+		builder.append(currentOrders);
 		return builder.toString();
 	}	
 }

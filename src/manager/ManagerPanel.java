@@ -102,7 +102,7 @@ public class ManagerPanel extends JFrame { // Main panel for the manager
 				break;
 				
 			case "Show Sessions": // Shows All Sessions
-				SessionManager sm = new SessionManager();
+				SessionsOverview sm = new SessionsOverview();
 				sm.setSize(350,350);
 				sm.setVisible(true);
 				break;

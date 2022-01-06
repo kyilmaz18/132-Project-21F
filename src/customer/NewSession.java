@@ -1,6 +1,6 @@
 package customer;
 
-import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,9 +19,12 @@ public class NewSession extends JFrame {
 	public NewSession() {
 		
 		super("Arrange Seating");
-		setLayout(new FlowLayout());
+		setLayout(new GridLayout(0,1));
 		
-		JLabel l = new JLabel("Enter Guest Amount:", JLabel.LEFT);
+		JLabel l = new JLabel("Available Seats: " + main.getTableCount() * 2, JLabel.LEFT);
+	    add(l);
+		
+		l = new JLabel("Enter Guest Amount:", JLabel.LEFT);
 	    add(l);
 	    count = new JTextField("Guest Amount");
 	    l.setLabelFor(count);
@@ -35,11 +38,10 @@ public class NewSession extends JFrame {
 	private class ButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
 			try {
-				if (Integer.parseInt(count.getText()) > 4 + (main.getTableCount() - 1) * 2 ) throw new ArithmeticException();
-				main.setTableCount(main.getTableCount() - 1);
+				if (Integer.parseInt(count.getText()) > (main.getTableCount() - 1) * 2 ) throw new ArithmeticException();
 				Session ns = new Session();
 				main.addSession(ns);
-				for (int i = Integer.parseInt(count.getText()) - 4; i > 0; i = i - 2) main.setTableCount(main.getTableCount() - 1);
+				for (int i = Integer.parseInt(count.getText()); i > 0; i = i - 2) main.setTableCount(main.getTableCount() - 1);
 				for (int i = 0; i < Integer.parseInt(count.getText()); i++) {
 		    		CustomerPanel cp = new CustomerPanel(main.getSessions().indexOf(ns));
 		    		cp.setSize(350,350);
@@ -49,7 +51,7 @@ public class NewSession extends JFrame {
 			} catch (ArithmeticException e) {
 				JOptionPane.showMessageDialog(null, "Not Enough Seats", "ERROR", JOptionPane.ERROR_MESSAGE);
 		    } catch (Exception e) {
-		    	JOptionPane.showMessageDialog(null, "Invalid Input", "ERROR", JOptionPane.ERROR_MESSAGE);
+		    	JOptionPane.showMessageDialog(null, "Invalid Guest Amount", "ERROR", JOptionPane.ERROR_MESSAGE);
 		    }
 		}
     }

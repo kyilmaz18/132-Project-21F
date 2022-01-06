@@ -63,6 +63,7 @@ import menu.Sandwich;
 				mw = new MenuViewer(main.getMenu());
 				mw.setSize(350, 350);
 				mw.setVisible(true);
+				temp.clear();
 				break;
 				
 			case "Show Drinks": 
@@ -72,6 +73,7 @@ import menu.Sandwich;
 				mw = new MenuViewer(temp);
 				mw.setSize(350, 350);
 				mw.setVisible(true);
+				temp.clear();
 				break;
 				
 			case "Show Entrees":
@@ -81,6 +83,7 @@ import menu.Sandwich;
 				mw = new MenuViewer(temp);
 				mw.setSize(350, 350);
 				mw.setVisible(true);
+				temp.clear();
 				break;
 				
 			case "Show Salads":
@@ -90,6 +93,7 @@ import menu.Sandwich;
 				mw = new MenuViewer(temp);
 				mw.setSize(350, 350);
 				mw.setVisible(true);
+				temp.clear();
 				break;
 				
 			case "Show Sandwiches":
@@ -99,6 +103,7 @@ import menu.Sandwich;
 				mw = new MenuViewer(temp);
 				mw.setSize(350, 350);
 				mw.setVisible(true);
+				temp.clear();
 				break;
 				
 			case "Show Main Dishes":
@@ -108,6 +113,7 @@ import menu.Sandwich;
 				mw = new MenuViewer(temp);
 				mw.setSize(350, 350);
 				mw.setVisible(true);
+				temp.clear();
 				break;
 			}
 		}
